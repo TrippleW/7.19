@@ -101,3 +101,24 @@ $ git commit -m "wrote a readme file"
     git checkout -- test.txt
 
 
+## 三、远程仓库
+
+创建SSH Key：
+
+    ssh-keygen -t rsa -C "youremail@example.com"
+
+### 1、添加远程库
+
+在GitHub上创建一个Git仓库，将本地仓库与其进行关联：
+
+    git remote add origin git@github.com:TrippleW/7.19.git
+
+关联后，远程库默认名字为`origin`，把本地版本库的master分支的所有内容推送到远程库上，第一次推送加`-u`：
+
+    git push -u origin master
+
+此后，每次本地提交，需要把本地`master`分支推送，使用以下命令：
+
+    git push origin master
+
+### 2、
