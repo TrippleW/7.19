@@ -1,0 +1,32 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>模板</title>
+</head>
+<body>
+    <ul id="example">
+        <li v-for="item in items">
+            {{ item.message }}
+        </li>
+        <!-- 可选的第二个参数作为当前项的索引 -->
+        <li v-for="(item,index) in items">
+            {{ parentMessage }} - {{ index }} - {{ item.message }}
+        </li>
+    </ul>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:"#example",
+        data:{
+            parentMessage:'Parent',
+            items:[
+                {message:'ab'},
+                {message:'bc'}
+            ]
+        }
+    })
+</script>

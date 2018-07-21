@@ -1,0 +1,25 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>v-bind和class数组语法</title>
+</head>
+<body>
+    <div id="example" v-bind:class="[activeClass, errorClass]"></div>
+    <!-- 使用3元判断
+    <div id="example" v-bind:class="[isActive ? activeClass : '',errorClass]"></div> -->
+    <!-- 在数组语法中使用对象语法
+    <div id="example" v-bind:class="[{active:isActive},errorClass]"></div> -->
+</body>
+</html>
+<script>
+    var vm = new Vue( {
+        el:"#example",
+        data:{
+            activeClass:'active',
+            errorClass:'text-danger'
+        }
+    })
+</script>

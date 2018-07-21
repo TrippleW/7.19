@@ -1,0 +1,39 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>test</title>
+    
+</head>
+<body>
+    <div id="example">
+        <p>full name: {{ fullName }}</p>
+        <p>first name: {{ firstName }}</p>
+        <p>last name: {{ lastName }}</p>
+    </div>
+    
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:'#example',
+        data:{
+            firstName:'Foo',
+            lastName:'Bar'
+        },
+        computed:{
+            fullName:{
+                get:function() {
+                    return this.firstName+' '+this.lastName;
+                },
+                set:function(newName) {
+                    var names = newName.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length-1];
+                }
+            }
+        }
+    });
+</script>

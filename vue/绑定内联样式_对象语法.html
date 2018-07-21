@@ -1,0 +1,35 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>绑定内联样式_对象语法</title>
+</head>
+<body>
+    <div id="example">
+        <!-- CSS 属性名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用单引号括起来)  -->
+        <!-- 绑定多个对象 -->
+        <div v-bind:style="{color:activeColor,fontSize:fontSize+'px'}">你好！</div>
+        <!-- 绑定一个对象 -->
+        <!-- <div v-bind:style="styleObj">你好！</div> -->
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:'#example',
+        // 绑定多个对象
+        data:{
+            activeColor:'red',
+            fontSize:30
+        }
+        //绑定一个对象
+        // data:{
+        //     styleObj:{
+        //         color:'red',
+        //         fontSize:'30px'
+        //     }
+        // }
+    })
+</script>

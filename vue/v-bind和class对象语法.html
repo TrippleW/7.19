@@ -1,0 +1,47 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>v-bind 和 class</title>
+</head>
+<body>
+    <!-- 第一种
+    含有’-‘需要加单引号
+    <div id="example" class="static" v-bind:class="{acitve:isActive, 'text-danger':hasError, capital:isCapital}"></div> -->
+    <!-- 第二、三种 -->
+    <div id="example" v-bind:class="classObj"></div>
+</body>
+</html>
+<script>
+    var vm = new Vue( {
+        el:"#example",
+        // 第一种
+        // data:{
+        //     isActive:true,
+        //     hasError:false,
+        //     isCapital:true
+        // }
+        //第二种
+        // data:{
+        //     classObj:{
+        //         acitve:true,
+        //         'text-danger':false
+        //     }
+        // }
+        //第三种
+        data:{
+            isActive:true,
+            error:null
+        },
+        computed:{
+            classObj:function(){
+                return{
+                    'active': this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    });
+</script>
