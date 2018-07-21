@@ -121,4 +121,9 @@ $ git commit -m "wrote a readme file"
 
     git push origin master
 
-### 2、
+### 2、从远程库克隆
+
+从准备好的远程库克隆
+
+    git clone git@github.com:TrippleW/learngit.git
+
