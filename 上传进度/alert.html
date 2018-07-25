@@ -1,0 +1,50 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>alert</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="iconfont.css">
+    <style>
+        
+        .alarm-box{
+            border: 1px solid #333;
+            text-align: center;
+            box-sizing:padding-box;
+            width: auto;
+            height: 26px;
+            z-index: 2000;
+            display: inline-block;
+        }
+        .fontFamily.upload-tanhao{
+            background-color: #F7BA2A;
+            color: #fff;
+            float: left;
+            padding: 4px 5px;
+        }
+        .alarm-word{
+            font-size: 12px;
+            vertical-align: middle;
+            line-height: 26px;
+            padding-left: 10px;padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="alarm-box">
+        <span class="fontFamily upload-tanhao"></span>
+        <span class="alarm-word">没有"上传失败"的试卷需要批量上传！</span>
+    </div>
+</body>
+</html>
+<script>
+    // var vm = new Vue({
+    //     el:"#alarm-box",
+    // })
+</script>

@@ -197,3 +197,16 @@ vm.userProfile = Object.assign({},vm.userProfile,{
 不要把 `.passive` 和 `.prevent` 一起使用，因为 `.prevent` 将会被忽略，同时浏览器可能会向你展示一个警告。请记住，`.passive` 会告诉浏览器你不想阻止事件的默认行为。
 
 `.passive` 修饰符尤其能够提升移动端的性能。
+
+22、`$ref`
+
+在父组件中通过`$ref给子组件动态添加属性`，具体代码如下；
+
+
+![图片.png](https://upload-images.jianshu.io/upload_images/3697666-7841b49fbe3a4f08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+注：由于是给子组件添加`$ref`，所以必须添加`$el(this.$refs.classifyfix.$el)`。
+
+23、this.$nextTick
+
+假设我们更改了某个dom元素内部的文本，而这时候我们想直接打印出这个被改变后的文本是需要dom更新之后才会实现的，也就好比我们将打印输出的代码放在setTimeout(fn, 0)中。

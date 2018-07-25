@@ -1,0 +1,76 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>扫描进度body</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .el-select-dropdown.el-popper{
+            top:70px !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="uploadProgressBody">
+        <el-row class="uploadProgressInfo">
+            <el-col :span="4">上传进度</el-col>
+            <el-col :span="20">
+                未上传共{{ uploadInfo.notUpload }}人，其中已扫描的{{ uploadInfo.scanned }}人,{{ uploadInfo.waiting }}人待上传，
+                {{ uploadInfo.failed }}人上传失败，{{ uploadInfo.existing }}人云端已存在
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="1">状态</el-col>
+            <el-col :span="4">
+                <el-select v-model="value">
+                    <el-option label="全部" value="option1" @>全部</el-option>
+                    <el-option label="上传失败" value="option2">上传失败</el-option>
+                    <el-option label="等待上传" value="option3">等待上传</el-option>
+                    <el-option label="未扫描" value="option4">未扫描</el-option>
+                </el-select>
+            </el-col>
+            <el-col :span="19">
+                <el-button size="small" type="primary">刷新数据</el-button>
+                <el-button size="small" type="primary">批量删除</el-button>
+                <el-button size="small" type="primary">确认替换云端试卷</el-button>
+                <el-button size="small" type="primary">重新批量上传</el-button>
+            </el-col>
+        </el-row>
+        <el-table :data="uploadDetail" border style="width: 100%">
+            <el-table-column prop="school" label="学校"></el-table-column>
+            <el-table-column prop="batch" label="批次"></el-table-column>
+            <el-table-column prop="number" label="考号"></el-table-column>
+            <el-table-column prop="name" label="姓名"></el-table-column>
+            <el-table-column prop="paper" label="试卷"></el-table-column>
+            <el-table-column prop="state" label="状态"></el-table-column>
+        </el-table>
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:"#uploadProgressBody",
+        data(){
+            return {
+                uploadInfo:{
+                    notUpload:4,
+                    scanned:3,
+                    waiting:1,
+                    failed:1,
+                    existing:1
+                },
+                value:'option1',
+                uploadDetail:[
+                    {school:'测试学校', batch:'--',number:'1234567',name:'李寻欢',paper:'--',state:'未扫描'},
+                    {school:'测试学校', batch:'001',number:'2345678',name:'陆小凤',paper:'查看试卷',state:'待上传'},
+                    {school:'测试学校', batch:'002',number:'3456789',name:'楚留香',paper:'查看试卷',state:'上传失败，code:11'},
+                    {school:'测试学校', batch:'003',number:'2333333',name:'花满楼',paper:'查看试卷',state:'云端已存在'}
+                ]
+            };
+        }
+    })
+</script>

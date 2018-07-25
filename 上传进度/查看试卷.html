@@ -1,0 +1,172 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>查看试卷hint</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .el-dialog__header{
+            border-bottom: 1px solid #ccc;
+        }
+        .el-dialog__body{
+            font-size: 14px;
+            text-align: initial;
+            padding:30px 40px;
+        }
+        span.red{
+            color: red;
+        }
+        .toggleButton{
+            padding: 5px 30px;
+            border-color: #606266;
+            border-radius: 0px;
+        }
+        .toggleButton:hover{
+            color: #409EFF;
+            border-color: #409EFF;
+        }
+        .el-dialog__body{
+            padding: 0px;
+        }
+        .toolbar{
+            height: 60px;
+            border-bottom: 1px solid #ddd;
+        }
+        .paperPosition{
+            line-height: 60px;
+            vertical-align: middle;
+            margin-left: 30px;
+        }
+        .toolbarBody{
+            line-height: 60px;
+            vertical-align: middle;
+        }
+        .toolbarBody .el-button{
+            width: 70px;
+            height: 30px;
+            padding: 0;
+        }
+        .el-icon-zoom-in{
+            font-size: 12px;
+        }
+        .examPaperContainer{
+            margin: 40px;
+            text-align: center;
+            height: 70%;
+            overflow: auto;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="replace-hint">
+        <el-button type="text" @click="replaceHintVisible=true;">查看试卷</el-button>
+        <el-dialog
+            :visible.sync="replaceHintVisible"
+            width="70%"
+            :before-close="handleClose">
+            <template slot="title">
+                <el-row>
+                  <el-col :span="10">查看试卷</el-col>
+                  <el-col :span="14">
+                      <el-button class="toggleButton" plain @click="changeFocus(1)" autofocus>本地</el-button>
+                      <el-button class="toggleButton" plain @click="changeFocus(2)">云端</el-button>
+                  </el-col>
+                </el-row>
+            </template>
+            <el-row class="toolbar">
+                <el-col :span="6" class="paperPosition">第{{ paperInfo.position }}页/共{{ paperInfo.total }}页</el-col>
+                <el-col :span="15" class="toolbarBody">
+                    <el-button plain round size="small" @click="rotatePaper(-1)" >左旋1°</el-button>
+                    <el-button plain round size="small" @click="rotatePaper(1)">右旋1°</el-button>
+                    <el-button plain round size="small" @click="rotatePaper(-90)"><img src="left-90.png" ></el-button>
+                    <el-button plain round size="small" @click="rotatePaper(90)"><img src="right-90.png"></el-button>
+                    <el-button plain round size="small" type="text" disabled class="el-icon-zoom-in" @click="zoomInPaper"></el-button>
+                    <el-button plain round size="small" type="text" disabled class="el-icon-zoom-out" @click="zoomOutPaper"></el-button>
+                </el-col>
+            </el-row>
+            <el-row class="examPaperContainer">
+                <img id="examPaper" src="timg.jpg">
+            </el-row>
+            <!-- <span slot="footer" class="dialog-footer">
+                <el-button size="mini" @click="replaceHintVisible = false">取 消</el-button>
+                <el-button size="mini" type="primary" @click="replaceHintVisible = false">确 定</el-button>
+            </span> -->
+        </el-dialog>
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:"#replace-hint",
+        data() {
+            return {
+                replaceHintVisible: false,
+                paperInfo:{
+                    position:1,
+                    total:2,
+                    paperDegree:0
+                }
+            };
+        },
+        methods: {
+            handleClose(done) {
+                // this.$confirm('确认关闭？')
+                // .then(_ => {
+                //     done();
+                // })
+                // .catch(_ => {});
+
+                done();
+            },
+            changeFocus(n){
+                // var focusBtn = document.getElementsByClassName("toggleButton")[0];
+                // if(n==1) {
+                //     focusBtn.style.color = '#409EFF';
+                //     focusBtn.style.borderColor='#409EFF';
+                // }
+                // else{
+                //     focusBtn.style.color = '#606266';
+                //     focusBtn.style.borderColor='#606266';
+                // }
+            },
+            //旋转图片
+            rotatePaper:function (degree) {
+                var paper = document.getElementById('examPaper');
+                this.paperInfo.paperDegree += degree;
+                this.$set(paper.style, '-webkit-transform', `rotate(${this.paperInfo.paperDegree}deg)`);
+                this.$set(paper.style, '-ms-transform', `rotate(${this.paperInfo.paperDegree}deg)`);
+                this.$set(paper.style, '-moz-transform', `rotate(${this.paperInfo.paperDegree}deg)`);
+                this.$set(paper.style, 'transform', `rotate(${this.paperInfo.paperDegree}deg)`);
+            },
+            // 等比放大1.2倍图片
+            zoomInPaper:function () {
+                const w = this.$refs['imgTag'][i].width * 1.2 + 'px';
+                this.$set(this.papers[i].style, 'width', w);
+
+            },
+            // 等比缩小1.2倍图片
+            zoomOutPaper:function () {
+                const i = this.carouselIndex;
+                const w = this.$refs['imgTag'][i].width / 1.2 + 'px';
+                this.$set(this.papers[i].style, 'width', w);
+            }
+        },
+        // mounted(){
+        //     var focusBtn = document.getElementsByClassName("toggleButton")[0];
+        //     focusBtn.focus();
+        //     focusBtn.style.color = '#409EFF';
+        //     focusBtn.style.borderColor='#409EFF';
+        // }
+
+        
+
+
+
+
+    })
+</script>

@@ -1,0 +1,77 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>批量删除hint</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .el-dialog__header{
+            font-size: 16px;
+            border-bottom: 1px solid #ccc;
+        }
+        .el-dialog__body{
+            font-size: 14px;
+            text-align: initial;
+            padding:30px 40px;
+        }
+        .el-checkbox-group{
+            margin-left: 15px;
+        }
+        .el-checkbox{
+            margin-bottom: 10px;
+        }
+        span.red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="delete-hint">
+        <el-button type="text" @click="deleteHintVisible=true">批量删除</el-button>
+        <el-dialog
+            title="批量删除"
+            :visible.sync="deleteHintVisible"
+            width="30%"
+            :before-close="handleClose">
+            <div class="hintContent">
+                <p>请选择要批量删除的类型（删除过程中请勿退出好分数扫描端）</p>
+                <el-checkbox-group v-model="deleteType">
+                  <el-checkbox label="上传失败">上传失败</el-checkbox><br><br>
+                  <el-checkbox label="云端已存在">云端已存在</el-checkbox>
+                </el-checkbox-group>
+                <p><span class="red">注：</span>勾选”云端已存在“时，放弃的是该状态下的本机扫描的数据，若要删除云端，请点击【确认替换云端试卷】按钮。</p>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button size="mini" @click="deleteHintVisible = false">取 消</el-button>
+                <el-button size="mini" type="primary" @click="deleteHintVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:"#delete-hint",
+        data() {
+            return {
+                deleteHintVisible: false,
+                deleteType:[]
+            };
+        },
+        methods: {
+            handleClose(done) {
+                // this.$confirm('确认关闭？')
+                // .then(_ => {
+                //     done();
+                // })
+                // .catch(_ => {});
+
+                done();
+            }
+        }
+    })
+</script>

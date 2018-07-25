@@ -1,0 +1,59 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>重传hint2</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .el-dialog__header{
+            border-bottom: 1px solid #ccc;
+        }
+        .el-dialog__body{
+            font-size: 14px;
+            text-align: initial;
+            padding:30px 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="reupload-hint">
+        <el-button type="text" @click="reuploadHintVisible=true">重新批量上传</el-button>
+        <el-dialog
+            title="提示"
+            :visible.sync="reuploadHintVisible"
+            width="30%"
+            :before-close="handleClose">
+            <span class="hintContent">是否重新上传所有上传失败的试卷？<br><br>上传过程中请勿退出好分数扫描客户端</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button size="mini" @click="reuploadHintVisible = false">取 消</el-button>
+                <el-button size="mini" type="primary" @click="reuploadHintVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:"#reupload-hint",
+        data() {
+            return {
+                reuploadHintVisible: false
+            };
+        },
+        methods: {
+            handleClose(done) {
+                // this.$confirm('确认关闭？')
+                // .then(_ => {
+                //     done();
+                // })
+                // .catch(_ => {});
+
+                done();
+            }
+        }
+    })
+</script>
